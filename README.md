@@ -1,4 +1,5 @@
-# Devops tools workshop: Scripting, Pipelines, Containers, Docker, Kubernetes
+# Devops tools workshop
+## Scripting, Pipelines, Containers, Docker, Kubernetes
 
 ## **Cross Platform Setup (Windows, Mac or Linux)**
 
@@ -14,7 +15,8 @@
 * [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 
 
-#### Note for Linux users: Docker for desktop is not available in linux but can be install natively
+#### Note for Linux users 
+`Docker for desktop is not available in linux but can be install natively
 
 * [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 

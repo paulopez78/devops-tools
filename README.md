@@ -16,9 +16,7 @@
 
 
 #### Note for Linux users 
-`Docker for desktop is not available in linux but can be install natively
-
-* [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+Docker for desktop is not available in linux but can be install natively [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
 ### Signup for
 

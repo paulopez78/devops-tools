@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mynginx
+    env: prod
+  name: mynginx
+  namespace: mdas
+spec:
+  containers:
+    - image: nginx
+      name: mynginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: mynginx
+  name: mynginx
+  namespace: mdas
+spec:
+  ports:
+    - nodePort: 30500
+      port: 80
+      targetPort: 80
+  selector:
+    app: mynginx
+    env: prod
+  type: NodePort

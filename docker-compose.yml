@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  myredis:
+    image: redis
+
+  myvotingapp:
+    image: paulopez/votingapp:0.4
+    build:
+      dockerfile: Dockerfile
+      context: ./src/votingapp
+    ports:
+      - 8080:80
+    environment:
+      REDIS: "myredis:6379"
+
+  mytest:
+    image: paulopez/votingapp-test
+    build:
+      context: ./test
+    environment:
+      VOTINGAPP_HOST: "myvotingapp"

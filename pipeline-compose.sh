@@ -1,7 +1,9 @@
 #!/bin/bash
 
-docker-compose rm -f && \
-docker-compose up --build -d && \
-docker-compose run --rm mytest && \
-docker-compose push && \
-echo "GREEN" || echo "RED"
+# cleanup
+docker-compose rm -s -f
+
+docker-compose up --build \
+    --abort-on-container-exit \
+    --exit-code-from mytest ||
+    (docker-compose logs && exit 1)

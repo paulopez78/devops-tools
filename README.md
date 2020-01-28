@@ -14,7 +14,6 @@
 * [jq](https://stedolan.github.io/jq/download/)
 * [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 
-
 #### Note for Linux users 
 Docker for desktop is not available in linux but can be install natively [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 

@@ -7,21 +7,16 @@ import (
 )
 
 var (
-	client = redis.NewClient(&redis.Options{Addr: getenv("REDIS", "localhost:6379")})
+	client = redis.NewClient(&redis.Options{Addr: getEnv("REDIS", "localhost:6379")})
 )
 
-type votingState struct {
-	Votes  map[string]int `json:"votes"`
-	Winner string         `json:"winner"`
-}
-
-func getState() (*votingState, error) {
+func getStateFromRedis() (*votingState, error) {
 	val, err := client.Get("votingState").Result()
 	if err != nil {
 		return nil, err
 	}
 	b := []byte(val)
-	state := &votingState{}
+	state := new(votingState)
 	err = json.Unmarshal(b, state)
 	if err != nil {
 		return nil, err
@@ -30,8 +25,8 @@ func getState() (*votingState, error) {
 	return state, nil
 }
 
-func saveState(state votingState) error {
-	b, err := json.Marshal(&state)
+func saveStateToRedis(state *votingState) error {
+	b, err := json.Marshal(state)
 	if err != nil {
 		return err
 	}

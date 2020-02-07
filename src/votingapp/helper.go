@@ -6,12 +6,17 @@ import (
 	"github.com/labstack/echo"
 )
 
-func getenv(key, fallback string) string {
+func getEnv(key, fallback string) string {
 	value := os.Getenv(key)
 	if len(value) == 0 {
 		return fallback
 	}
 	return value
+}
+
+func existsEnv(key string) bool {
+	_, exists := os.LookupEnv(key)
+	return exists
 }
 
 func getRandomKey(a map[string]int) string {

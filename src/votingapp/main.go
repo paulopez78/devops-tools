@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo"
@@ -15,16 +14,24 @@ var (
 )
 
 func main() {
-	time.Sleep(5 * time.Second)
+	// time.Sleep(5 * time.Second)
 	e.Static("/", "ui")
 
 	api := "/vote"
-	e.GET(api, log(getVotes))
-	e.POST(api, log(startVoting))
-	e.PUT(api, log(vote))
-	e.DELETE(api, log(finishVoting))
-	e.GET("/ws", log(serveWs))
 
+	if existsEnv("REDIS") {
+		e.GET(api, log(func(c echo.Context) error { return getVotes(c, getStateFromRedis) }))
+		e.POST(api, log(func(c echo.Context) error { return startVoting(c, saveStateToRedis) }))
+		e.PUT(api, log(func(c echo.Context) error { return vote(c, getStateFromRedis, saveStateToRedis) }))
+		e.DELETE(api, log(func(c echo.Context) error { return finishVoting(c, getStateFromRedis, saveStateToRedis) }))
+	} else {
+		e.GET(api, log(func(c echo.Context) error { return getVotes(c, getStateFromMem) }))
+		e.POST(api, log(func(c echo.Context) error { return startVoting(c, saveStateToMem) }))
+		e.PUT(api, log(func(c echo.Context) error { return vote(c, getStateFromMem, saveStateToMem) }))
+		e.DELETE(api, log(func(c echo.Context) error { return finishVoting(c, getStateFromMem, saveStateToMem) }))
+	}
+
+	e.GET("/ws", log(serveWs))
 	e.Logger.Fatal(e.Start(":80"))
 }
 

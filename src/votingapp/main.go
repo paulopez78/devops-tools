@@ -32,7 +32,7 @@ func main() {
 	}
 
 	e.GET("/ws", log(serveWs))
-	e.Logger.Fatal(e.Start(":80"))
+	e.Logger.Fatal(e.Start(":5000"))
 }
 
 func sendMessage(value interface{}) error {

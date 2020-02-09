@@ -10,7 +10,7 @@ deps(){
 
 # cleanup
 cleanup(){
-    pkill votingapp || ps aux | grep votingapp | awk 'print $1' | head -1 | xargs kill -9
+    pkill votingapp || ps aux | grep votingapp | awk 'print $1' | head -1 | xargs kill 9
     rm -rf build
 }
 
@@ -20,8 +20,9 @@ build(){
     go build -o ./build ./src/votingapp 
     cp -r ./src/votingapp/ui ./build
 
-    docker run -p 6379:6379 -d redis || true
     pushd build
+    # docker run -p 6379:6379 -d redis || true
+    # REDIS=localhost:6379 ./votingapp &
     ./votingapp &
     popd
 }
@@ -44,7 +45,7 @@ retry(){
 
 # test
 test() {
-    votingurl='http://localhost/vote'
+    votingurl='http://localhost:5000/vote'
     curl --url  $votingurl \
         --request POST \
         --data '{"topics":["dev", "ops"]}' \

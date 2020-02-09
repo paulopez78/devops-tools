@@ -30,7 +30,7 @@
                 for (var topic in state.votes) {
                     document.getElementById('votingTopics').innerHTML +=
                         `<div id="${topic}" class="topic ${state.winner === topic ? 'selected' : ''}">
-                            ${topic}, votes: ${state.votes[topic]}
+                            ${topic}: ${state.votes[topic]}
                         </div>`;
                 }
                 for (var topic in state.votes) {

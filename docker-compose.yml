@@ -5,12 +5,12 @@ services:
     image: redis
 
   myvotingapp:
-    image: paulopez/votingapp:0.4
+    image: paulopez/votingapp
     build:
       dockerfile: Dockerfile
       context: ./src/votingapp
     ports:
-      - 8080:80
+      - 8080:5000
     environment:
       REDIS: "myredis:6379"
 
@@ -19,4 +19,4 @@ services:
     build:
       context: ./test
     environment:
-      VOTINGAPP_HOST: "myvotingapp"
+      VOTINGAPP_HOST: "myvotingapp:5000"

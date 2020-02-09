@@ -30,13 +30,13 @@ docker run \
 docker run \
     --name myvotingapp \
     --network "$network" \
-    -p 8080:80 \
+    -p 8080:5000 \
     -e REDIS="myredis:6379" \
     -d "$image"
 
 # test
 docker run \
-    --rm -e VOTINGAPP_HOST="myvotingapp" \
+    --rm -e VOTINGAPP_HOST="myvotingapp:5000" \
     --network "$network" \
     "$test_image"
 

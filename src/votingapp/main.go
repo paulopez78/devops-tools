@@ -20,15 +20,20 @@ func main() {
 	api := "/vote"
 
 	if existsEnv("REDIS") {
-		e.GET(api, log(func(c echo.Context) error { return getVotes(c, getStateFromRedis) }))
-		e.POST(api, log(func(c echo.Context) error { return startVoting(c, saveStateToRedis) }))
-		e.PUT(api, log(func(c echo.Context) error { return vote(c, getStateFromRedis, saveStateToRedis) }))
-		e.DELETE(api, log(func(c echo.Context) error { return finishVoting(c, getStateFromRedis, saveStateToRedis) }))
+		e.GET(api, composeGet(getVotes, getStateFromRedis))
+		e.POST(api, composeSave(startVoting, saveStateToRedis))
+		e.PUT(api, composeGetAndSave(vote, getStateFromRedis, saveStateToRedis))
+		e.DELETE(api, composeGetAndSave(finishVoting, getStateFromRedis, saveStateToRedis))
+	} else if existsEnv("MONGO") {
+		e.GET(api, composeGet(getVotes, getStateFromMongo))
+		e.POST(api, composeSave(startVoting, saveStateToMongo))
+		e.PUT(api, composeGetAndSave(vote, getStateFromMongo, saveStateToMongo))
+		e.DELETE(api, composeGetAndSave(finishVoting, getStateFromMongo, saveStateToMongo))
 	} else {
-		e.GET(api, log(func(c echo.Context) error { return getVotes(c, getStateFromMem) }))
-		e.POST(api, log(func(c echo.Context) error { return startVoting(c, saveStateToMem) }))
-		e.PUT(api, log(func(c echo.Context) error { return vote(c, getStateFromMem, saveStateToMem) }))
-		e.DELETE(api, log(func(c echo.Context) error { return finishVoting(c, getStateFromMem, saveStateToMem) }))
+		e.GET(api, composeGet(getVotes, getStateFromMem))
+		e.POST(api, composeSave(startVoting, saveStateToMongo))
+		e.PUT(api, composeGetAndSave(vote, getStateFromMem, saveStateToMem))
+		e.DELETE(api, composeGetAndSave(finishVoting, getStateFromMem, saveStateToMem))
 	}
 
 	e.GET("/ws", log(serveWs))

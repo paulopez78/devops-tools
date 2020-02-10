@@ -26,6 +26,24 @@ func getRandomKey(a map[string]int) string {
 	return ""
 }
 
+func composeGet(handler func(echo.Context, get) error, getState get) echo.HandlerFunc {
+	return log(func(c echo.Context) error {
+		return handler(c, getState)
+	})
+}
+
+func composeSave(handler func(echo.Context, save) error, saveState save) echo.HandlerFunc {
+	return log(func(c echo.Context) error {
+		return handler(c, saveState)
+	})
+}
+
+func composeGetAndSave(handler func(echo.Context, get, save) error, getState get, saveState save) echo.HandlerFunc {
+	return log(func(c echo.Context) error {
+		return handler(c, getState, saveState)
+	})
+}
+
 func log(h func(echo.Context) error) func(echo.Context) error {
 	return func(c echo.Context) error {
 		err := h(c)

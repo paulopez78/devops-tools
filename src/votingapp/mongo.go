@@ -1,35 +1,13 @@
 package main
 
-import (
-	"encoding/json"
+import "errors"
 
-	"github.com/go-redis/redis"
-)
-
-var (
-	client = redis.NewClient(&redis.Options{Addr: getEnv("REDIS", "localhost:6379")})
-)
+var ()
 
 func getStateFromMongo() (*votingState, error) {
-	val, err := client.Get("votingState").Result()
-	if err != nil {
-		return nil, err
-	}
-	b := []byte(val)
-	state := new(votingState)
-	err = json.Unmarshal(b, state)
-	if err != nil {
-		return nil, err
-	}
-
-	return state, nil
+	return nil, errors.New("not implemented")
 }
 
 func saveStateToMongo(state *votingState) error {
-	b, err := json.Marshal(state)
-	if err != nil {
-		return err
-	}
-
-	return client.Set("votingState", string(b), 0).Err()
+	return errors.New("not implemented")
 }

@@ -26,3 +26,7 @@
 ### Pull all the needed images
 
 Start docker and pull images running the script `pull.sh`
+
+
+### Slide Deck
+[Slides for the workshop](https://docs.google.com/presentation/d/19jxpdzmK2SjL3mBAEcCXHRXi1Y1wgw0bjDMdd1KzvOE/edit?usp=sharing)

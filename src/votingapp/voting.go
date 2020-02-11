@@ -66,7 +66,7 @@ func Vote(c echo.Context, getState get, saveState save) error {
 		return c.JSON(http.StatusBadRequest, state)
 	}
 
-	state.Votes[topic.Topic] = state.Votes[topic.Topic] + 1
+	vote(state, topic)
 	return saveAndPublishState(c, state, saveState)
 }
 
@@ -81,14 +81,7 @@ func Finish(c echo.Context, getState get, saveState save) error {
 		return err
 	}
 
-	winner := getRandomKey(state.Votes)
-	for topic, count := range state.Votes {
-		if count > state.Votes[winner] {
-			winner = topic
-		}
-	}
-
-	state.Winner = winner
+	finish(state)
 	return saveAndPublishState(c, state, saveState)
 }
 

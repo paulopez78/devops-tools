@@ -1,5 +1,9 @@
 #!/bin/bash
 
+install_deps(){
+    go mod download
+}
+
 unit_test(){
     set -e
     go test ./src/votingapp
@@ -110,6 +114,7 @@ deliver(){
     # upload to shared repository (NFS, FTP, ...)
 }
 
+install_deps
 unit_test
 build
 integration_test

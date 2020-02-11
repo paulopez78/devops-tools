@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 
-	"github.com/go-redis/redis"
+	"github.com/go-redis/redis/v7"
 )
 
 var (

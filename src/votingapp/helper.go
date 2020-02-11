@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"os"
 
 	"github.com/labstack/echo"
@@ -52,4 +53,18 @@ func log(h func(echo.Context) error) func(echo.Context) error {
 		}
 		return err
 	}
+}
+
+func saveAndPublishState(c echo.Context, state *votingState, saveState save) error {
+	err := saveState(state)
+	if err != nil {
+		return err
+	}
+
+	err = sendMessage(state)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, state)
 }

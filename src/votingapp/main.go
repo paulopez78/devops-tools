@@ -20,20 +20,20 @@ func main() {
 	api := "/vote"
 
 	if existsEnv("REDIS") {
-		e.GET(api, composeGet(getVotes, getStateFromRedis))
-		e.POST(api, composeSave(startVoting, saveStateToRedis))
-		e.PUT(api, composeGetAndSave(vote, getStateFromRedis, saveStateToRedis))
-		e.DELETE(api, composeGetAndSave(finishVoting, getStateFromRedis, saveStateToRedis))
+		e.GET(api, composeGet(GetVotes, getStateFromRedis))
+		e.POST(api, composeSave(Start, saveStateToRedis))
+		e.PUT(api, composeGetAndSave(Vote, getStateFromRedis, saveStateToRedis))
+		e.DELETE(api, composeGetAndSave(Finish, getStateFromRedis, saveStateToRedis))
 	} else if existsEnv("MONGO") {
-		e.GET(api, composeGet(getVotes, getStateFromMongo))
-		e.POST(api, composeSave(startVoting, saveStateToMongo))
-		e.PUT(api, composeGetAndSave(vote, getStateFromMongo, saveStateToMongo))
-		e.DELETE(api, composeGetAndSave(finishVoting, getStateFromMongo, saveStateToMongo))
+		e.GET(api, composeGet(GetVotes, getStateFromMongo))
+		e.POST(api, composeSave(Start, saveStateToMongo))
+		e.PUT(api, composeGetAndSave(Vote, getStateFromMongo, saveStateToMongo))
+		e.DELETE(api, composeGetAndSave(Finish, getStateFromMongo, saveStateToMongo))
 	} else {
-		e.GET(api, composeGet(getVotes, getStateFromMem))
-		e.POST(api, composeSave(startVoting, saveStateToMongo))
-		e.PUT(api, composeGetAndSave(vote, getStateFromMem, saveStateToMem))
-		e.DELETE(api, composeGetAndSave(finishVoting, getStateFromMem, saveStateToMem))
+		e.GET(api, composeGet(GetVotes, getStateFromMem))
+		e.POST(api, composeSave(Start, saveStateToMongo))
+		e.PUT(api, composeGetAndSave(Vote, getStateFromMem, saveStateToMem))
+		e.DELETE(api, composeGetAndSave(Finish, getStateFromMem, saveStateToMem))
 	}
 
 	e.GET("/ws", log(serveWs))

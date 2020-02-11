@@ -22,7 +22,7 @@ type votingState struct {
 	Winner string         `json:"winner"`
 }
 
-func getVotes(c echo.Context, getState get) error {
+func GetVotes(c echo.Context, getState get) error {
 	state, err := getState()
 	if err != nil {
 		return err
@@ -30,22 +30,28 @@ func getVotes(c echo.Context, getState get) error {
 	return c.JSON(http.StatusOK, state)
 }
 
-func startVoting(c echo.Context, saveState save) error {
+func Start(c echo.Context, saveState save) error {
 	topics := new(votingOptions)
 	if err := c.Bind(topics); err != nil {
 		return err
 	}
 
+	state := start(topics)
+
+	return saveAndPublishState(c, state, saveState)
+}
+
+func start(topics *votingOptions) *votingState {
 	state := &votingState{make(map[string]int), ""}
 
 	for _, val := range topics.Topics {
 		state.Votes[val] = 0
 	}
 
-	return saveAndPublishState(c, state, saveState)
+	return state
 }
 
-func vote(c echo.Context, getState get, saveState save) error {
+func Vote(c echo.Context, getState get, saveState save) error {
 	topic := new(voteOption)
 	if err := c.Bind(&topic); err != nil {
 		return err
@@ -64,7 +70,12 @@ func vote(c echo.Context, getState get, saveState save) error {
 	return saveAndPublishState(c, state, saveState)
 }
 
-func finishVoting(c echo.Context, getState get, saveState save) error {
+func vote(state *votingState, topic *voteOption) *votingState {
+	state.Votes[topic.Topic] = state.Votes[topic.Topic] + 1
+	return state
+}
+
+func Finish(c echo.Context, getState get, saveState save) error {
 	state, err := getState()
 	if err != nil {
 		return err
@@ -81,16 +92,14 @@ func finishVoting(c echo.Context, getState get, saveState save) error {
 	return saveAndPublishState(c, state, saveState)
 }
 
-func saveAndPublishState(c echo.Context, state *votingState, saveState save) error {
-	err := saveState(state)
-	if err != nil {
-		return err
+func finish(state *votingState) *votingState {
+	winner := getRandomKey(state.Votes)
+	for topic, count := range state.Votes {
+		if count > state.Votes[winner] {
+			winner = topic
+		}
 	}
 
-	err = sendMessage(state)
-	if err != nil {
-		return err
-	}
-
-	return c.JSON(http.StatusOK, state)
+	state.Winner = winner
+	return state
 }

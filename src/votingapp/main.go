@@ -31,7 +31,7 @@ func main() {
 		e.DELETE(api, composeGetAndSave(Finish, getStateFromMongo, saveStateToMongo))
 	} else {
 		e.GET(api, composeGet(GetVotes, getStateFromMem))
-		e.POST(api, composeSave(Start, saveStateToMongo))
+		e.POST(api, composeSave(Start, saveStateToMem))
 		e.PUT(api, composeGetAndSave(Vote, getStateFromMem, saveStateToMem))
 		e.DELETE(api, composeGetAndSave(Finish, getStateFromMem, saveStateToMem))
 	}

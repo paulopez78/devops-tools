@@ -1,5 +1,15 @@
 #!/bin/bash
 
+install_tools(){
+   # install go 1.3
+   # install jq 
+   echo "Installing tools based on current operating sytem..."
+}
+
+install_deps(){
+    go mod download
+}
+
 install_deps(){
     go mod download
 }
@@ -114,6 +124,7 @@ deliver(){
     # upload to shared repository (NFS, FTP, ...)
 }
 
+install_tools
 install_deps
 unit_test
 build

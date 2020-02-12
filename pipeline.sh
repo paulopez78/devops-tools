@@ -3,15 +3,17 @@ set -e
 
 # install deps
 deps(){
-    go get github.com/gorilla/websocket
-    go get github.com/labstack/echo
-    go get github.com/go-redis/redis
+    go mod download
 }
 
 # cleanup
 cleanup(){
     pkill votingapp || ps aux | grep votingapp | awk 'print $1' | head -1 | xargs kill 9
     rm -rf build
+}
+
+unit_test(){
+    go test ./src/votingapp
 }
 
 # build 
@@ -75,5 +77,6 @@ test() {
 
 deps
 cleanup || true
+unit_test
 build
 retry test

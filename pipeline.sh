@@ -1,28 +1,29 @@
 #!/bin/bash
 set -e
 
-# install deps
-deps(){
+download_deps(){
     go mod download
 }
 
-# cleanup
 cleanup(){
-    pkill votingapp || ps aux | grep votingapp | awk 'print $1' | head -1 | xargs kill 9
+    # if pkill not available
+    # pkill votingapp || ps aux | grep votingapp | awk 'print $1' | head -1 | xargs kill 9
+    pkill votingapp
     rm -rf build
 }
 
 unit_test(){
-    go test ./src/votingapp
+    go test 
 }
 
-# build 
 build(){
-    mkdir build
-    go build -o ./build ./src/votingapp 
-    cp -r ./src/votingapp/ui ./build
+    go build -o build/votingapp
+    cp -r ./ui ./build
+}
 
+run(){
     pushd build
+    # run with redis in docker
     # docker run -p 6379:6379 -d redis || true
     # REDIS=localhost:6379 ./votingapp &
     ./votingapp &
@@ -75,8 +76,12 @@ test() {
     fi
 }
 
-deps
-cleanup || true
-unit_test
-build
+pushd src/votingapp
+    download_deps
+    cleanup || true
+    unit_test
+    build
+    run
+popd
+
 retry test

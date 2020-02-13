@@ -1,12 +1,14 @@
 ######## BUILDER #########
-FROM golang AS builder
+FROM golang:1.13 AS builder
+WORKDIR /votingapp
 
-RUN go get github.com/gorilla/websocket && \
-    go get github.com/labstack/echo && \
-    go get github.com/go-redis/redis
+COPY go.mod .
+COPY go.sum .
+
+# Get dependancies - layer will be cached if we won't update mod/sum files
+RUN go mod download
 
 COPY . .
-
 RUN go build -o /build/votingapp && \
     cp -r ui /build
 

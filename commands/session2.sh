@@ -85,3 +85,14 @@ docker build \
     -f alpine/Dockerfile \
     -t myregistry/kurl:0.1-alpine \
     . # don't forget the path to the building context, used by the COPY instruction
+
+# first try building an image for votingapp
+docker build \
+    -f src/votingapp/Dockerfile \
+    -t myregistry/votingapp:0.1\
+    ./src/votingapp # don't forget the path to the building context, used by the COPY instruction
+
+# first try running votingapp (dettached terminal)
+docker run -p 8080:5000 \
+    -d \
+    myregistry/votingapp:0.1

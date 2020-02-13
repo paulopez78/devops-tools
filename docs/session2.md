@@ -8,6 +8,7 @@ Containers are isolated processes running the software that is distributed in im
 ## Building Images with DockerFiles
 
 Building images is an automated process described in an script file called DockerFile.
+
 - Create a Dockerfile for the 'kurl' application.
     - Show how layers are created during the build process.
     - Show how to version an image.
@@ -16,4 +17,7 @@ Building images is an automated process described in an script file called Docke
     - Use alpine to create smaller images.
     - Create an alias to `kurl` to show that running a container is the same as running a command/process.
 
-Samples about running containers and building images are in `session2.sh`
+- Create a Dockerfile for the 'votingapp' application.
+- Running the votingapp in a container exposing a port.
+
+All Samples about running containers and building images are in `session2.sh`

@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+# export DOCKER_BUILDKIT=1
 
 registry=${DOCKER_REGISTRY:-"paulopez"} 
 network=votingapp

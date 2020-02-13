@@ -60,3 +60,28 @@ docker run \
     ubuntu sh -c "apt-get update && apt-get install curl -y && rm -rf /var/lib/apt/lists/*" \
 && docker commit kurl-container kurl-image \
 && docker image ls kurl-image
+
+# build images with a Dockerfile
+docker build \
+    -f Dockerfile \
+    -t myregistry/kurl:0.1 \ # tag your images, registry/image:version
+    . # don't forget the path to the building context, used by the COPY instruction
+
+# run the built image
+docker run \
+    myregistry/kurl:0.1 \
+    google.com
+
+# an image is made for running only one app/process
+alias kurl="docker run myregistry/kurl:0.1 google.com"
+
+# tag to match registry to push
+docker tag myregistry/kurl:0.1 mynewregistry/kurl:0.1
+docker login # by default logs in to DockerHub
+docker push mynewregistry/kurl:0.1
+
+# build using FROM alpine and compare sizes
+docker build \
+    -f alpine/Dockerfile \
+    -t myregistry/kurl:0.1-alpine \
+    . # don't forget the path to the building context, used by the COPY instruction

@@ -8,15 +8,12 @@ install_tools(){
 
 install_deps(){
     go mod download
-}
-
-install_deps(){
-    go mod download
+    echo $?
 }
 
 unit_test(){
     set -e
-    go test ./src/votingapp
+    go test
     set +e
     echo $?
 }
@@ -30,7 +27,7 @@ build(){
 
     # option 1: using flags 
     set -e
-    go build -o build ./src/votingapp
+    go build -o ./build/votingapp
     set +e
     echo $?
 
@@ -47,7 +44,7 @@ build(){
     #     exit 1
     # fi
 
-    cp -r ./src/votingapp/ui build
+    cp -r ui build
     echo $?
 }
 
@@ -124,9 +121,11 @@ deliver(){
     # upload to shared repository (NFS, FTP, ...)
 }
 
+pushd ./src/votingapp
 install_tools
 install_deps
 unit_test
 build
 integration_test
 deliver
+popd

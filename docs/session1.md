@@ -12,6 +12,6 @@ Main goal is to understand the basics of [bash scripting](https://devhints.io/ba
  
 The most important part is checking if the pipeline **stops** when there is an **error exit code** after building or running tests.
 
-There are 2 samples in the repo showing the main problems when building an stateful pipeline in a concrete operation system:
+There are 2 samples in the repo showing the main problems when building an stateful pipelines in a not immutable environment:
 - `pipelines-samples.sh`
 - `pipelines.sh`

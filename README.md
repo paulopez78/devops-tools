@@ -5,8 +5,15 @@
 
 ### Download and install
 
-* [Visual Studio Code](https://code.visualstudio.com/download)
-  - Plugins: Go, Python, Docker, Kubernetes
+* [Visual Studio Code](https://code.visualstudio.com/download) with recommended plugins:
+    - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools)
+    - [Kubernetes](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools)
+    - [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
+    - [Go](https://marketplace.visualstudio.com/items?itemName=ms-vscode.Go)
+    - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+    - [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
+    - [vscode-icons](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools)
+
 * [Git](https://git-scm.com/downloads)
 * [Docker](https://www.docker.com/products/docker-desktop)
 * [Golang](https://golang.org/dl/)

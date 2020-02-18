@@ -5,6 +5,7 @@ set -e
 registry=${DOCKER_REGISTRY:-"paulopez"} 
 network=votingapp
 base_image=${BASE_IMAGE:-"alpine"}
+test_type=${TEST_TYPE:-"shell"}
 image=$registry/votingapp
 test_image=$registry/votingapp-test
 
@@ -22,8 +23,8 @@ docker build \
 
 docker build \
     -t "$test_image" \
-    -f ./test/docker/"$base_image"/Dockerfile \
-    ./test
+    -f ./test/"$test_type"/docker/"$base_image"/Dockerfile \
+    ./test/"$test_type"
 
 # run
 docker run \
@@ -40,7 +41,7 @@ docker run \
 
 # test
 docker run \
-    --rm -e VOTINGAPP_HOST="myvotingapp:5000" \
+    --rm -e VOTING_URL="http://myvotingapp:5000" \
     --network "$network" \
     "$test_image"
 

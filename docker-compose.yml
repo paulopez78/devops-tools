@@ -7,8 +7,8 @@ services:
   myvotingapp:
     image: paulopez/votingapp
     build:
-      dockerfile: Dockerfile
       context: ./src/votingapp
+      dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile
     ports:
       - 8080:5000
     environment:
@@ -17,6 +17,7 @@ services:
   mytest:
     image: paulopez/votingapp-test
     build:
-      context: ./test
+      context: ./test/${TEST_TYPE:-shell}
+      dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile
     environment:
-      VOTINGAPP_HOST: "myvotingapp:5000"
+      VOTING_URL: "http://myvotingapp:5000"

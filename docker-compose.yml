@@ -1,23 +1,31 @@
 version: "3.7"
 
 services:
-  myredis:
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8080:80
+
+  redis:
     image: redis
 
-  myvotingapp:
+  votingapp:
     image: paulopez/votingapp
     build:
       context: ./src/votingapp
       dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile
-    ports:
-      - 8080:5000
     environment:
-      REDIS: "myredis:6379"
+      REDIS: "redis:6379"
+    # ports:
+    #   - 8080:5000
 
-  mytest:
+  test:
     image: paulopez/votingapp-test
     build:
       context: ./test/${TEST_TYPE:-shell}
       dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile
     environment:
-      VOTING_URL: "http://myvotingapp:5000"
+      VOTING_URL: "http://nginx"
+      # VOTING_URL: "http://votingapp:5000"

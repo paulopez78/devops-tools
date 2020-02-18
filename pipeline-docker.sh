@@ -4,6 +4,7 @@ set -e
 
 registry=${DOCKER_REGISTRY:-"paulopez"} 
 network=votingapp
+base_image=${BASE_IMAGE:-"alpine"}
 image=$registry/votingapp
 test_image=$registry/votingapp-test
 
@@ -16,10 +17,12 @@ docker rm -f myredis || true
 # build
 docker build \
     -t "$image" \
+    -f ./src/votingapp/docker/"$base_image"/Dockerfile \
     ./src/votingapp
 
 docker build \
     -t "$test_image" \
+    -f ./test/docker/"$base_image"/Dockerfile \
     ./test
 
 # run

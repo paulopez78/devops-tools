@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 retry(){
@@ -8,7 +8,7 @@ retry(){
     "$@" && return 0
     until [ $n -ge $retries ]
     do
-        n=$(($n+1))
+        n=$((n+1))
         echo "Retrying...$n of $retries, wait for $interval seconds"
         sleep $interval
         "$@" && return 0
@@ -38,7 +38,7 @@ test() {
 
     expectedWinner="dev"
 
-    if [ "$expectedWinner" == "$winner" ]; then
+    if [ "$expectedWinner" = "$winner" ]; then
         echo 'TEST PASSED'
         return 0
     else

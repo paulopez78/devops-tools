@@ -10,12 +10,16 @@ Ideally we would like to create a new machine every time we run our pipeline and
 ### Docker Multistage Builds
 
 - Create a Multistage Dockerfile for the 'votingapp' application.
-    - Create image for both ubuntu and alpine 
+    - Create different images based on ubntu and alpine.
     - Use .dockerignore to filter the sent context to the docker daemon.
     - Optimize cache layering to avoid go modules dependencies download.
-
 
 ### Docker Networking
 
 - Create a Dockerfile for the bash integration tests.
 - Create a docker network attaching both the votingapp and integration tests containers.
+- Create a redis container attached to the same network configuring the votingapp container for using redis.
+
+There are 3 samples in the repo showing how to refactor towards immutable pipeline with docker
+- `pipelines-docker-samples.sh`
+- `pipelines-docker.sh`

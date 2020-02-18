@@ -9,6 +9,8 @@ COPY go.sum .
 RUN go mod download
 
 COPY . .
+# alpine does not have gcc installed
+ENV CGO_ENABLED=0
 RUN go test
 RUN go build -o /build/votingapp && \
     cp -r ui /build

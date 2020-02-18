@@ -8,4 +8,4 @@ RUN apt-get update && apt-get install -y \
 COPY test.sh .
 RUN chmod +x test.sh
 
-ENTRYPOINT ["bash", "-c", "./test.sh" ]
+ENTRYPOINT ["sh", "-c", "./test.sh" ]

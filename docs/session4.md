@@ -8,3 +8,8 @@ There are 3 files with samples for that session:
 - `pipelines-compose.sh`
 - `docker-compose.yml`
 - `session3.sh`
+
+# Kubernetes local setup
+
+- Local kubernetes setup with docker for desktop or minikube.
+- Kubectl autocomplete, ohmyzsh plugin and kubectx.

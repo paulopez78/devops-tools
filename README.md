@@ -22,6 +22,12 @@
 * [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 * [Kind](https://kind.sigs.k8s.io/docs/user/quick-start)
 
+Recommended:
+* [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
+    * enable `kubectl` plugin
+* [kubectx](https://github.com/ahmetb/kubectx)
+
+
 #### Note for Linux users 
 - Docker for desktop is not available in Linux but docker can be installed natively [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 - As Docker for desktop is not available one of the easiest ways to run kubernetes in linux is using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)

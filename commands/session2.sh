@@ -34,6 +34,9 @@ docker rm -f $container_id
 # remove all running and stopped containers (very destructive action)
 docker rm -f "$(docker ps -qa)"
 
+# remove all, containers, volumes, networks and images
+docker system prune -f --all 
+
 # run ubuntu interactive container
 docker run -it ubuntu
 # check hostname/ip/pid/disk

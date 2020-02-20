@@ -13,6 +13,8 @@ All the `kubectl` examples are in the file `k8s-pods.sh`
 
 # Session 7: Kubernetes networking and deployments
 
+All the `kubectl` examples are in the file `k8s-network.sh`
+
 # Session 8: Kubernetes ingress, configmaps and secrets
 
 # Session 9 (optional): Kubernetes storate and statefulsets

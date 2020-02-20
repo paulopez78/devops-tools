@@ -59,3 +59,8 @@ kubectl diff -f test-proxy.yaml
 kubectl apply -f --dry-run test-proxy.yaml
 kubectl apply -f --server-dry-run test-proxy.yaml
 kubectl apply -f test-proxy.yaml
+
+# check the pod lifecycle(events)
+# check the pod lifecycle with failing container (by default it will restart)
+# restartPolicy: Always | Never | OnFailure
+kubectl events -o wide --watch

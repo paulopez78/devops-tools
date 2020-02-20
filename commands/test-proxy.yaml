@@ -7,6 +7,9 @@ metadata:
   name: test-proxy
   namespace: workshop
 spec:
+  # restartPolicy: Never
+  restartPolicy: OnFailure
+  # restartPolicy: Always
   volumes:
     - name: logs
       emptyDir: {}
@@ -16,12 +19,61 @@ spec:
       volumeMounts:
         - mountPath: /var/log/nginx
           name: logs
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 80
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100Mi
+        limits:
+          cpu: 100m
+          memory: 100Mi
 
     - image: paulopez/kurl
       name: kurl
+      # args:
+      #   - sleep
+      #   - infinity
+      # args:
+      #   - "bash"
+      #   - "-c"
+      #   - "sleep 10 && exit 1"
+      # args:
+      #   - "bash"
+      #   - "-c"
+      #   - while true; do touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 60; done
+      # livenessProbe:
+      #   initialDelaySeconds: 5
+      #   periodSeconds: 5
+      #   successThreshold: 1
+      #   failureThreshold: 3
+      #   exec:
+      #     command:
+      #       - cat
+      #       - /tmp/healthy
       args:
-        - sleep
-        - infinity
+        - "bash"
+        - "-c"
+        - echo "Warming Cache" && sleep 60 && touch /tmp/ready && sleep infinity
+      readinessProbe:
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        failureThreshold: 3
+        exec:
+          command:
+            - cat
+            - /tmp/ready
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100Mi
+        limits:
+          cpu: 100m
+          memory: 100Mi
       volumeMounts:
         - mountPath: /logs
           name: logs

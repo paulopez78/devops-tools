@@ -12,7 +12,7 @@ services:
     image: redis
 
   votingapp:
-    image: paulopez/votingapp
+    image: paulopez/votingapp:${BASE_IMAGE:-alpine}
     build:
       context: ./src/votingapp
       dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile
@@ -22,7 +22,7 @@ services:
     #   - 8080:5000
 
   test:
-    image: paulopez/votingapp-test
+    image: paulopez/votingapp-test:${BASE_IMAGE:-alpine}
     build:
       context: ./test/${TEST_TYPE:-shell}
       dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile

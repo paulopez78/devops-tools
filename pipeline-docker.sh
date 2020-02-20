@@ -6,8 +6,8 @@ registry=${DOCKER_REGISTRY:-"paulopez"}
 network=votingapp
 base_image=${BASE_IMAGE:-"alpine"}
 test_type=${TEST_TYPE:-"shell"}
-image=$registry/votingapp
-test_image=$registry/votingapp-test
+image=$registry/votingapp:$base_image
+test_image=$registry/votingapp-test:$base_image
 
 docker network create "$network"|| true
 

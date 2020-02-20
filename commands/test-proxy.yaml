@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: test-proxy
+    env: staging
+  name: test-proxy
+  namespace: workshop
+spec:
+  volumes:
+    - name: logs
+      emptyDir: {}
+  containers:
+    - image: nginx
+      name: test-proxy
+      volumeMounts:
+        - mountPath: /var/log/nginx
+          name: logs
+
+    - image: paulopez/kurl
+      name: kurl
+      args:
+        - sleep
+        - infinity
+      volumeMounts:
+        - mountPath: /logs
+          name: logs

@@ -9,3 +9,4 @@ spec:
   containers:
     - image: paulopez/votingapp:ubuntu
       name: votingapp
+      imagePullPolicy: Always

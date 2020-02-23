@@ -65,7 +65,7 @@ kubectl apply -f test-proxy.yaml
 # restartPolicy: Always | Never | OnFailure
 kubectl events -o wide --watch
 
-# ReplicationController and Replicasets
+# ReplicationController and Replicasets using votingapp
 kubectl run --generator=run/v1 --image=paulopez/votingapp:alpine
 kubectl get rc -o yaml > votingapp_rc.yaml
 

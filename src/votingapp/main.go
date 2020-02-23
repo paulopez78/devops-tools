@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math/rand"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -18,7 +19,6 @@ func main() {
 	e.Static("/", "ui")
 
 	api := "/vote"
-
 	if existsEnv("REDIS") {
 		e.GET(api, composeGet(GetVotes, getStateFromRedis))
 		e.POST(api, composeSave(Start, saveStateToRedis))
@@ -37,6 +37,13 @@ func main() {
 	}
 
 	e.GET("/ws", log(serveWs))
+	e.GET("/ready", func(c echo.Context) error {
+		if rand.Intn(100) > 50 {
+			return c.String(http.StatusInternalServerError, "not ready")
+		}
+
+		return c.String(http.StatusOK, "ready")
+	})
 	e.Logger.Fatal(e.Start(":5000"))
 }
 

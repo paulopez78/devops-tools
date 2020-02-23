@@ -17,3 +17,12 @@ spec:
       containers:
         - image: paulopez/votingapp:alpine
           name: votingapp
+          imagePullPolicy: Always
+          readinessProbe:
+            periodSeconds: 5
+            initialDelaySeconds: 5
+            successThreshold: 1
+            failureThreshold: 1
+            httpGet:
+              path: /ready
+              port: 5000

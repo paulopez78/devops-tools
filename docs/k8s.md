@@ -1,4 +1,4 @@
-# Session 5: Kubernetes pods and services
+# Session 5: Kubernetes pods, replicasets and services
 
 - Local kubernetes setup with docker for desktop or minikube.
 - Kubectl autocomplete, ohmyzsh plugin and kubectx.
@@ -8,13 +8,17 @@
 - Export pod to a yaml file and create it declarative way.
 - Multiple containers in a pod sharing a volume, sidecar container pattern.
 - Pods lifecycle, failing containers and probes.
+- ReplicationController and Replicasets
 
 All the `kubectl` examples are in the file `k8s-pods.sh`
 
-# Session 7: Kubernetes networking and deployments
+# Session 6: Kubernetes services and deployments
+
+- Expose pod and replicaset with a service, explaining service selector.
+- ClusterIp, NodePort, LoadBalancer services types.
 
 All the `kubectl` examples are in the file `k8s-network.sh`
 
-# Session 8: Kubernetes ingress, configmaps and secrets
+# Session 7: Kubernetes ingress, configmaps and secrets
 
-# Session 9 (optional): Kubernetes storate and statefulsets
+# Session 8: Kubernetes storate and statefulsets

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: votingapp
+  name: votingapp
+  namespace: votingapp
+spec:
+  containers:
+    - image: paulopez/votingapp:ubuntu
+      name: votingapp

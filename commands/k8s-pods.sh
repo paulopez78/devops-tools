@@ -64,3 +64,18 @@ kubectl apply -f test-proxy.yaml
 # check the pod lifecycle with failing container (by default it will restart)
 # restartPolicy: Always | Never | OnFailure
 kubectl events -o wide --watch
+
+# ReplicationController and Replicasets
+kubectl run --generator=run/v1 --image=paulopez/votingapp:alpine
+kubectl get rc -o yaml > votingapp_rc.yaml
+
+# ReplicaControllers are deprecated so convert to Replicaset (only change apart kind and version is the selector)
+kubectl get events -o wide --watch
+kubectl delete pods --all
+kubectl scale rs votingapp --replicas 1
+#edit pod labels and replicaset selector to take pods in and out of the replicaset
+
+# use kind to show what happens when a node fails (takes 5 minutes to move pods)
+docker stop kind-worker
+kubectl cordon/uncordon kind-worker2
+kubectl drain kind-worker

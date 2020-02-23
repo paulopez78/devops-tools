@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    run: votingapp
+  name: votingapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: votingapp
+  template:
+    metadata:
+      labels:
+        run: votingapp
+    spec:
+      containers:
+        - image: paulopez/votingapp:alpine
+          name: votingapp

@@ -46,6 +46,9 @@ kubectl label pod votingapp run=votingapp --overwrite
 # find coredns pods
 kubectl get pods -l k8s-app=kube-dns --all-namespaces -L k8s-app
 
+# poor service DNS as env variables
+k exec -it votingapp -- env | grep VOTINGAPP
+
 # endpoints and readiness probe
 kubectl get endpoints --watch
 kubectl label pod votingapp run=votingapp-beta --overwrite

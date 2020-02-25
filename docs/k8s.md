@@ -16,6 +16,8 @@ All the `kubectl` examples are in the file `k8s-pods.sh`
 
 - Expose pod and replicaset with a service, explaining service selector.
 - ClusterIp, NodePort, LoadBalancer services types.
+- Kube DNS and services environment variables.
+- Endpoints and readiness probes.
 
 All the `kubectl` examples are in the file `k8s-network.sh`
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"math/rand"
+	// "math/rand"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -38,9 +38,9 @@ func main() {
 
 	e.GET("/ws", log(serveWs))
 	e.GET("/ready", func(c echo.Context) error {
-		if rand.Intn(100) > 50 {
-			return c.String(http.StatusInternalServerError, "not ready")
-		}
+		// if rand.Intn(100) > 50 {
+		// 	return c.String(http.StatusInternalServerError, "not ready")
+		// }
 
 		return c.String(http.StatusOK, "ready")
 	})

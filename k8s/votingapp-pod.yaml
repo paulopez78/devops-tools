@@ -3,10 +3,18 @@ kind: Pod
 metadata:
   labels:
     run: votingapp
-  name: votingapp
+  name: votingapp-beta
   namespace: votingapp
 spec:
   containers:
-    - image: paulopez/votingapp:ubuntu
+    - image: paulopez/votingapp:0.3-alpine
       name: votingapp
       imagePullPolicy: Always
+      readinessProbe:
+        periodSeconds: 5
+        initialDelaySeconds: 5
+        successThreshold: 1
+        failureThreshold: 1
+        httpGet:
+          path: /ready
+          port: 5000

@@ -3,10 +3,11 @@ set -e
 # export DOCKER_BUILDKIT=1
 
 registry=${DOCKER_REGISTRY:-"paulopez"} 
+tag=${TAG:-"1.0"} 
 network=votingapp
 base_image=${BASE_IMAGE:-"alpine"}
 test_type=${TEST_TYPE:-"shell"}
-image=$registry/votingapp:$base_image
+image=$registry/votingapp:$tag-$base_image
 test_image=$registry/votingapp-test:$base_image
 
 docker network create "$network"|| true

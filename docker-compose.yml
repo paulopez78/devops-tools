@@ -12,7 +12,7 @@ services:
     image: redis
 
   votingapp:
-    image: paulopez/votingapp:${BASE_IMAGE:-alpine}
+    image: paulopez/votingapp:${TAG:-latest}-${BASE_IMAGE:-alpine}
     build:
       context: ./src/votingapp
       dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile

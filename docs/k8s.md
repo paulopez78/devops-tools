@@ -21,7 +21,7 @@ All the `kubectl` examples are in the file `k8s-pods.sh`
 - Rolling updates examples with naked pods, replicasets and deployments.
 - maxSurge, minUnavailable, revisionHistoryLimit and minReadySeconds
 
-All the `kubectl` examples are in the file `k8s-network.sh`
+All the `kubectl` examples are in `k8s-network.sh` and `k8s-deployments.sh`
 
 # Session 7: Kubernetes ingress, configmaps and secrets
 

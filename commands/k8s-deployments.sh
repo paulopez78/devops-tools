@@ -20,6 +20,57 @@ kubectl run votingapp --image=paulopez/votingapp:0.1-alpine --generator=run-pod/
 kubectl run votingapp-beta --image=paulopez/votingapp:0.2-alpine --generator=run-pod/v1
 kubectl patch svc votingapp -p '{"spec":{"selector":{"run":"votingapp-beta"}}}'                     
 
+# rolling update with replicate sets
+cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: votingapp
+  name: votingapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: votingapp
+      deployment: votingapp-1
+  template:
+    metadata:
+      labels:
+        app: votingapp
+        deployment: votingapp-1
+    spec:
+      containers:
+        - image: paulopez/votingapp:0.1-alpine
+          name: votingapp
+EOF
+
+cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: votingapp-beta
+  name: votingapp-beta
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: votingapp
+      deployment: votingapp-2
+  template:
+    metadata:
+      labels:
+        app: votingapp
+        deployment: votingapp-2
+    spec:
+      containers:
+        - image: paulopez/votingapp:0.2-alpine
+          name: votingapp
+EOF
+
+kubectl scale rs votingapp-beta --replicas 1
+kubectl scale rs votingapp --replicas 2
 
 # create a deployment yaml resource
 kubectl create deployment nginx --image nginx --dry-run --output yaml

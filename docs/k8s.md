@@ -18,6 +18,8 @@ All the `kubectl` examples are in the file `k8s-pods.sh`
 - ClusterIp, NodePort, LoadBalancer services types.
 - Kube DNS and services environment variables.
 - Endpoints and readiness probes.
+- Rolling updates examples with naked pods, replicasets and deployments.
+- maxSurge, minUnavailable, revisionHistoryLimit and minReadySeconds
 
 All the `kubectl` examples are in the file `k8s-network.sh`
 

@@ -80,7 +80,6 @@ kubectl set image deployment votingapp votingapp=paulopez/votingapp:0.2-alpine
 kubectl rollout status deployment votingapp
 kubectl rollout undo deployment votingapp
 
-
 # Track changes when changing resources
 kubectl replace --save-config
 kubectl apply view-last-applied deployments nginx -o yaml

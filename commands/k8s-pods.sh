@@ -20,7 +20,7 @@ kubectl api-resources
 kubectl get ns
 
 # create/running/describe/delete pods
-kubectl run test-proxy --generator=run-pod/v1 --image=nginx
+kubectl run test-proxy --generator=run-pod/v1 --image=nginx -v=9
 kubectl get pods -o wide  
 kubectl get all
 kubectl logs test-proxy

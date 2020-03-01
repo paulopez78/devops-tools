@@ -73,9 +73,13 @@ kubectl scale rs votingapp-beta --replicas 1
 kubectl scale rs votingapp --replicas 2
 
 # create a deployment yaml resource
-kubectl create deployment nginx --image nginx --dry-run --output yaml
-kubectl run nginx --image nginx --dry-run --expose --port 8080 --output yaml
-kubectl get deployment nginx --output yaml --export > mynginx.yaml
+kubectl create deployment votingapp --image paulopez/votingapp:0.1-alpine --dry-run --output yaml
+kubectl expose deployment votingapp --port=8080 --target-port 5000 --type NodePort
+
+kubectl set image deployment votingapp votingapp=paulopez/votingapp:0.2-alpine
+kubectl rollout status deployment votingapp
+kubectl rollout undo deployment votingapp
+
 
 # Track changes when changing resources
 kubectl replace --save-config

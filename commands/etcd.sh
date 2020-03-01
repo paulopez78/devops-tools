@@ -11,4 +11,3 @@ sh -c "ETCDCTL_API=3 etcdctl \
 --key=/run/config/pki/etcd/healthcheck-client.key \
 get \"$KEY\" \
 --prefix=true -w json" | jq -r '.kvs[0].value' | base64 --decode
-

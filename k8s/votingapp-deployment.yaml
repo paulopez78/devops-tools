@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: votingapp
+  name: votingapp
+spec:
+  replicas: 4
+  progressDeadlineSeconds: 300
+  revisionHistoryLimit: 10
+  minReadySeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: votingapp
+  template:
+    metadata:
+      labels:
+        app: votingapp
+    spec:
+      containers:
+        - image: paulopez/votingapp:0.1-alpine
+          name: votingapp
+          readinessProbe:
+            periodSeconds: 5
+            initialDelaySeconds: 5
+            successThreshold: 1
+            failureThreshold: 1
+            httpGet:
+              path: /ready
+              port: 5000

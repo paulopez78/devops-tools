@@ -23,4 +23,4 @@ All the `kubectl` examples are in the file `k8s-network.sh`
 
 # Session 7: Kubernetes ingress, configmaps and secrets
 
-# Session 8: Kubernetes storate and statefulsets
+# Session 8: Kubernetes storage and statefulsets

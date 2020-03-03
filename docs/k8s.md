@@ -30,3 +30,7 @@ All the `kubectl` examples are in `k8s-network.sh` and `k8s-deployments.sh`
 - Multiple ingress controllers using ``kubernetes.io/ingress.class`` annotation.
 
 # Session 8: Kubernetes storage and statefulsets
+- PersistentVolumes, PersistentVolumeClaims
+- StorageClass
+- StatefulSets and Headless services.
+- StatefulSets with PersistentVolumeClaims, PersistentVolumes and StorageClass

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: votingapp
+  name: votingapp-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: votingapp.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: votingapp
+              servicePort: 8080

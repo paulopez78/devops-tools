@@ -24,5 +24,9 @@ All the `kubectl` examples are in the file `k8s-pods.sh`
 All the `kubectl` examples are in `k8s-network.sh` and `k8s-deployments.sh`
 
 # Session 7: Kubernetes ingress, configmaps and secrets
+- Install nginx ingress controller (docker for deskop or minikube)
+- Add votingapp ingress to configure nginx automatically.
+- Install traefik ingress controller.
+- Multiple ingress controllers using ``kubernetes.io/ingress.class`` annotation.
 
 # Session 8: Kubernetes storage and statefulsets

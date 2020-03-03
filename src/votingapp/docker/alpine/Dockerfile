@@ -1,5 +1,5 @@
 ######## BUILDER #########
-FROM golang:1.13-alpine3.11 AS builder
+FROM golang:1.14-alpine3.11 AS builder
 WORKDIR /votingapp
 
 COPY go.mod .

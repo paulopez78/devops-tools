@@ -1,7 +1,6 @@
 package main
 
 import (
-	// "math/rand"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -15,7 +14,7 @@ var (
 )
 
 func main() {
-	// time.Sleep(5 * time.Second)
+	//time.Sleep(5 * time.Second)
 	e.Static("/", "ui")
 
 	api := "/vote"

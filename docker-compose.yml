@@ -11,6 +11,9 @@ services:
   redis:
     image: redis
 
+  # mongo:
+  #   image: mongo
+
   votingapp:
     image: paulopez/votingapp:${TAG:-latest}-${BASE_IMAGE:-alpine}
     build:
@@ -18,6 +21,7 @@ services:
       dockerfile: docker/${BASE_IMAGE:-alpine}/Dockerfile
     environment:
       REDIS: "redis:6379"
+      # MONGO: "mongodb://mongo:27017"
     # ports:
     #   - 8080:5000
 

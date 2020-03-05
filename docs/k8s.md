@@ -33,4 +33,4 @@ All the `kubectl` examples are in `k8s-network.sh` and `k8s-deployments.sh`
 - PersistentVolumes, PersistentVolumeClaims
 - StorageClass
 - StatefulSets and Headless services.
-- StatefulSets with PersistentVolumeClaims, PersistentVolumes and StorageClass
+- StatefulSets with PersistentVolumeClaims, PersistentVolumes and StorageClass.

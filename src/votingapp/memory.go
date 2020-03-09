@@ -1,7 +1,7 @@
 package main
 
 var (
-	state *votingState
+	state *votingState = &votingState{}
 )
 
 func getStateFromMem() (*votingState, error) {

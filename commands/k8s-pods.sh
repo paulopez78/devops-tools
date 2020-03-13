@@ -20,6 +20,7 @@ kubectl api-resources
 kubectl get ns
 
 # create/running/describe/delete pods
+# kubectl -v verbosity 10 levels
 kubectl run test-proxy --generator=run-pod/v1 --image=nginx -v=9
 kubectl get pods -o wide  
 kubectl get all

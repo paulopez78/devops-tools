@@ -38,7 +38,7 @@ kubens workshop
 
 # export pod yaml
 kubectl get pod test-proxy -o yaml > test-proxy.yaml
-kubectl explain
+kubectl explain pod --recursive
 
 # labels
 kubectl get pods --show-labels

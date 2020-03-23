@@ -80,3 +80,15 @@ kubectl scale rs votingapp --replicas 1
 docker stop kind-worker
 kubectl cordon/uncordon kind-worker2
 kubectl drain kind-worker
+
+# INSTALL K8s Dashboard
+https://github.com/kubernetes/dashboard
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc6/aio/deploy/recommended.yaml
+kubectl apply ../k8s/dashboard-adminuser.yaml
+
+# Get authentication token
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+# open dashboard
+kubectl proxy
+open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/

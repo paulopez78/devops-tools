@@ -10,6 +10,14 @@ spec:
     - image: paulopez/votingapp:0.3-alpine
       name: votingapp
       imagePullPolicy: Always
+      livenessProbe:
+        periodSeconds: 5
+        initialDelaySeconds: 5
+        successThreshold: 1
+        failureThreshold: 3
+        httpGet:
+          path: /vote
+          port: 5000
       readinessProbe:
         periodSeconds: 5
         initialDelaySeconds: 5

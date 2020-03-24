@@ -24,7 +24,7 @@
 
 Recommended:
 * [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
-    * enable `kubectl` plugin
+    * enable [kubectl` plugin](https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/kubectl/kubectl.plugin.zsh)
 * [kubectx](https://github.com/ahmetb/kubectx)
 
 

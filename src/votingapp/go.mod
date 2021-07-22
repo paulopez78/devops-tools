@@ -6,5 +6,5 @@ require (
 	github.com/go-redis/redis/v7 v7.2.0
 	github.com/gorilla/websocket v1.4.1
 	github.com/labstack/echo/v4 v4.1.15
-	go.mongodb.org/mongo-driver v1.3.1
+	go.mongodb.org/mongo-driver v1.5.1
 )
